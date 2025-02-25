@@ -1,22 +1,6 @@
-import pandas as pd
-
-# Creating a dataset for combinational logic depth prediction
-data = {
-    'Function': ['F1', 'F2', 'F3', 'F4', 'F5'],
-    'Fan_In': [3, 3, 4, 2, 5],
-    'Fan_Out': [1, 1, 1, 1, 1],
-    'Signal_Type': [1, 1, 1, 0, 1],  # 1: Critical, 0: Non-critical
-    'Logic_Gates': [7, 3, 9, 2, 11],
-    'Clock_Frequency_MHz': [100, 100, 200, 50, 150],
-    'Path_Length': [7, 3, 9, 2, 11],
-    'Actual_Depth': [7, 3, 9, 2, 11]  # Ground truth for training
-}
-
-# Convert the data to a DataFrame
-depth_df = pd.DataFrame(data)
-
-# Display the dataset
-print(depth_df)
-
-# Save the dataset to a CSV file
-depth_df.to_csv('combinational_logic_depth_dataset.csv', index=False)
+Signal,Fan-in,Fan-out,Gate Type,Path Length,Logic Depth
+S1,2,3,AND,4,4
+S2,3,2,OR,3,3
+S3,1,4,XOR,5,5
+S4,2,1,NAND,2,2
+S5,4,2,NOR,6,6
