@@ -1,88 +1,22 @@
-Combinational Logic Depth
-The combinational logic depth is the number of logic gates in the longest path from the inputs to the outputs.
+import pandas as pd
 
-For F1:
-NOT Gates:
+# Creating a dataset for combinational logic depth prediction
+data = {
+    'Function': ['F1', 'F2', 'F3', 'F4', 'F5'],
+    'Fan_In': [3, 3, 4, 2, 5],
+    'Fan_Out': [1, 1, 1, 1, 1],
+    'Signal_Type': [1, 1, 1, 0, 1],  # 1: Critical, 0: Non-critical
+    'Logic_Gates': [7, 3, 9, 2, 11],
+    'Clock_Frequency_MHz': [100, 100, 200, 50, 150],
+    'Path_Length': [7, 3, 9, 2, 11],
+    'Actual_Depth': [7, 3, 9, 2, 11]  # Ground truth for training
+}
 
-Each product term requires 2 NOT gates (e.g., ~B and ~C).
+# Convert the data to a DataFrame
+depth_df = pd.DataFrame(data)
 
-Since the NOT gates operate in parallel, the depth contribution from NOT gates is 1.
+# Display the dataset
+print(depth_df)
 
-AND Gates:
-
-Each product term requires 3 AND gates (e.g., A & ~B & ~C).
-
-The AND gates are cascaded, so the depth contribution from AND gates is 3.
-
-OR Gates:
-
-The 4 product terms are combined using 3 OR gates (since a 4-input OR gate can be built using 3 OR gates in a tree structure).
-
-The depth contribution from OR gates is 3.
-
-Total Depth for F1:
-
-NOT gates: 1
-
-AND gates: 3
-
-OR gates: 3
-
-Total depth = 1 + 3 + 3 = 7
-
-For F2:
-AND Gates:
-
-Each product term requires 2 AND gates (e.g., A & B).
-
-The AND gates operate in parallel, so the depth contribution from AND gates is 1.
-
-OR Gates:
-
-The 3 product terms are combined using 2 OR gates (since a 3-input OR gate can be built using 2 OR gates in a tree structure).
-
-The depth contribution from OR gates is 2.
-
-Total Depth for F2:
-
-AND gates: 1
-
-OR gates: 2
-
-Total depth = 1 + 2 = 3
-
-Output of the Code
-If we use the provided Python code to predict the combinational logic depth for F1 and F2, we need to extract the relevant features for each output and pass them to the trained model.
-
-Features for F1:
-Fan-In: 3 (inputs: A, B, C)
-
-Fan-Out: 1 (output: F1)
-
-Signal-Type: 1 (critical signal)
-
-Logic-Gates: 7 (total depth)
-
-Clock-Frequency: Assume 100 MHz (as in the example)
-
-Path-Length: 7 (total depth)
-
-Features for F2:
-Fan-In: 3 (inputs: A, B, C)
-
-Fan-Out: 1 (output: F2)
-
-Signal-Type: 1 (critical signal)
-
-Logic-Gates: 3 (total depth)
-
-Clock-Frequency: Assume 100 MHz (as in the example)
-
-Path-Length: 3 (total depth)
-
-Predicted Combinational Depth:
-Using the trained model, the predicted combinational depths might be:
-
-F1: Approximately 7 (close to the actual depth).
-
-F2: Approximately 3 (close to the actual depth).
+# Save the dataset to a CSV file
+depth_df.to_csv('combinational_logic_depth_dataset.csv', index=False)
